@@ -1,3 +1,5 @@
+# Note : ord function gives equivalent ASCII for an alphabet
+
 encrypted_text1 = """
 RW. XMJWQTHP MTQRJX, BMT BFX ZXZFQQD AJWD QFYJ NS YMJ RTWSNSLX, XFAJ ZUTS YMTXJ
 STY NSKWJVZJSY THHFXNTSX BMJS MJ BFX ZU FQQ SNLMY, BFX XJFYJI FY YMJ GWJFPKFXY YFGQJ.
@@ -15,23 +17,25 @@ def decrypt_code(shift):
     alpha = {}
     i = 0
     for c in encrypted_text1:
-        alpha[i] = c
+        alpha[i] = c #first save each character in the encrypted string into a dictionary
         i = i + 1
         
     alpha1 = {}
     for x, y in alpha.items():
-        if 'A' <=y<= 'Z':
-            if (ord(y) + shift) > ord('Z'):
+        if 'A' <=y<= 'Z': #check if the character in the text is an alphabet, if not skip statements within 'if'
+            if (ord(y) + shift) > ord('Z'): # if the alphabet shift reaches the last uppercase alphabet, then it goes around to 'A'
                 alpha1[x] = chr((ord('A')-1) + (ord(y) + shift - ord('Z')))
             else:
-                alpha1[x] = chr(ord(y) + shift)
+                alpha1[x] = chr(ord(y) + shift) 
         else:
-            alpha1[x] = y
+            alpha1[x] = y #save the non-alphabets characters in the string as well
         
     decrypt_text = ''
     for c in alpha1.values():
-        decrypt_text = decrypt_text + c
+        decrypt_text = decrypt_text + c #concatenate dictionary values to generate the decrypted text
     
     return decrypt_text
 
-decrypt_text = decrypt_code(21)
+decrypt_text = decrypt_code(21) # For the given encrypted text, shifting each character by 21 decrypts to original text. Hurrah!!!
+
+
